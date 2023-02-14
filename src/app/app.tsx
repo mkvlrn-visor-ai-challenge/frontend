@@ -16,12 +16,7 @@ export function App() {
   }, [setChatId, setMessages]);
 
   return (
-    <AppShell
-      header={<Header />}
-      footer={<Footer />}
-      padding='md'
-      styles={(theme) => ({ main: { backgroundColor: theme.colors.gray[0] } })}
-    >
+    <AppShell header={<Header />} footer={<Footer />} padding='md'>
       <Body />
     </AppShell>
   );
