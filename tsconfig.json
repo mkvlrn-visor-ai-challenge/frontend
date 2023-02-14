@@ -22,5 +22,5 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "include": ["src", "jest.*.ts"]
+  "include": ["src", "jest.*.ts", "vite.config.ts"]
 }
