@@ -1,9 +1,18 @@
-import { MantineProvider } from '@mantine/core';
+import { AppShell } from '@mantine/core';
+
+import { Body } from '#/components/body.jsx';
+import { Footer } from '#/components/footer.jsx';
+import { Header } from '#/components/header.jsx';
 
 export function App() {
   return (
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <span>hey</span>
-    </MantineProvider>
+    <AppShell
+      header={<Header />}
+      footer={<Footer />}
+      padding='md'
+      styles={(theme) => ({ main: { backgroundColor: theme.colors.gray[0] } })}
+    >
+      <Body />
+    </AppShell>
   );
 }
