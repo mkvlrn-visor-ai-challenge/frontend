@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'vite/client';
+
 declare module '*.svg' {
   const content: any;
   export default content;

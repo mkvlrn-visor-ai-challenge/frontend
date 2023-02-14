@@ -21,9 +21,10 @@ export function Footer() {
     bottom!.scrollIntoView();
     setMsg('');
     setWaitingResponse(true);
+    console.log(import.meta.env);
 
     try {
-      const response = await axios.post('http://localhost:4000/chat', { msg, chatId });
+      const response = await axios.post(import.meta.env.VITE_BACKEND_URL, { msg, chatId });
       const botTimestamp = Date.now();
       pushMessage({ from: 'bot', text: response.data.message, timestamp: botTimestamp });
       // waits for new message to appear in html, then scrolls it into view
