@@ -16,5 +16,5 @@ export function useChatState() {
 
   const pushMessage = (msg: Message) => setMessages((prev) => [...prev, msg]);
 
-  return { chatId, setChatId, messages, pushMessage };
+  return { chatId, setChatId, messages, setMessages, pushMessage };
 }
