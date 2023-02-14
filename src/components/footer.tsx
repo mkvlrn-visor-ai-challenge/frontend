@@ -1,6 +1,7 @@
-import { Button, Group, Footer as MantineFooter, TextInput } from '@mantine/core';
+import { ActionIcon, Group, Footer as MantineFooter, TextInput } from '@mantine/core';
+import { IconCircleArrowRight, IconMessageDots } from '@tabler/icons-react';
 import axios, { AxiosError } from 'axios';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 
 import { useChatState } from '#/recoil/state.js';
 import { waitForElement } from '#/utils/element-observer.js';
@@ -38,18 +39,34 @@ export function Footer() {
     }
   };
 
+  const handleEnter = async (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      await handleClick();
+    }
+  };
+
   return (
     <MantineFooter height='3rem'>
       <Group position='center' align='center' h='100%'>
         <TextInput
+          icon={<IconMessageDots size={24} stroke={1.5} />}
+          radius='xl'
+          rightSection={
+            <ActionIcon
+              onClick={handleClick}
+              disabled={waitingResponse || msg === ''}
+              size={32}
+              variant='transparent'
+            >
+              <IconCircleArrowRight size={24} stroke={1.5} />
+            </ActionIcon>
+          }
           value={msg}
           onChange={handleMsgChange}
+          onKeyUp={handleEnter}
           placeholder='your message'
           style={{ width: '70%' }}
         />
-        <Button onClick={handleClick} ml='xs' disabled={waitingResponse || msg === ''}>
-          send
-        </Button>
       </Group>
     </MantineFooter>
   );
