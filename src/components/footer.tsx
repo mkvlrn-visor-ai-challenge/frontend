@@ -21,7 +21,6 @@ export function Footer() {
     bottom!.scrollIntoView();
     setMsg('');
     setWaitingResponse(true);
-    console.log(import.meta.env);
 
     try {
       const response = await axios.post(import.meta.env.VITE_BACKEND_URL, { msg, chatId });
@@ -48,7 +47,7 @@ export function Footer() {
           placeholder='your message'
           style={{ width: '70%' }}
         />
-        <Button onClick={handleClick} ml='xs' disabled={waitingResponse}>
+        <Button onClick={handleClick} ml='xs' disabled={waitingResponse || msg === ''}>
           send
         </Button>
       </Group>
