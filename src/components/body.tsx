@@ -1,31 +1,34 @@
-import { Container } from '@mantine/core';
+import { Container, Group, Loader } from '@mantine/core';
+import { IconRobot } from '@tabler/icons-react';
 
 import { styled } from '#/components/_styled.jsx';
+import { Message } from '#/components/message.jsx';
 import { useChatState } from '#/recoil/state.js';
 
-const Messages = styled.div`
-  span {
-    display: block;
-    font-size: 2rem;
-  }
-`;
-
-const Message = styled.div``;
+const Messages = styled.div``;
 
 export function Body() {
   const { messages, waitingResponse } = useChatState();
 
   return (
-    <Container fluid style={{ marginTop: '4rem', marginBottom: '4rem' }}>
+    <Container mt='4rem' mb='4rem'>
       <Messages>
         {messages.map((msg) => (
-          <Message key={`${msg.timestamp}-${msg.from}`}>
-            <span>{msg.from}</span>
-            <span>{msg.text}</span>
-            <span id={`timestamp-${msg.timestamp}`}>{msg.timestamp}</span>
-          </Message>
+          <Message
+            key={`${msg.timestamp}-${msg.from}`}
+            from={msg.from}
+            text={msg.text}
+            timestamp={msg.timestamp}
+          />
         ))}
-        {waitingResponse && <p>bot is typing...</p>}
+        {waitingResponse && (
+          <div id='bot-is-typing'>
+            <Group>
+              <IconRobot />
+              <Loader variant='dots' c='lime' />
+            </Group>
+          </div>
+        )}
       </Messages>
     </Container>
   );

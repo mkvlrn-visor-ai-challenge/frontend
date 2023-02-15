@@ -24,15 +24,20 @@ export function Footer() {
     setWaitingResponse(true);
 
     try {
+      bottom = (await waitForElement('#bot-is-typing')) as HTMLDivElement;
+      bottom!.scrollIntoView();
+
       const response = await axios.post(import.meta.env.VITE_BACKEND_URL, { msg, chatId });
       const botTimestamp = Date.now();
       pushMessage({ from: 'bot', text: response.data.message, timestamp: botTimestamp });
-      // waits for new message to appear in html, then scrolls it into view
+
       bottom = (await waitForElement(`#timestamp-${botTimestamp}`)) as HTMLDivElement;
       bottom!.scrollIntoView();
     } catch (err) {
       if (err instanceof AxiosError) {
         console.log(err.request, err.toJSON());
+      } else {
+        console.log(err);
       }
     } finally {
       setWaitingResponse(false);
@@ -65,7 +70,7 @@ export function Footer() {
           onChange={handleMsgChange}
           onKeyUp={handleEnter}
           placeholder='your message'
-          style={{ width: '70%' }}
+          w='70%'
         />
       </Group>
     </MantineFooter>
