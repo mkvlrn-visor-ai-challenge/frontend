@@ -1,4 +1,5 @@
 import { MantineProvider } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
@@ -10,7 +11,9 @@ root.render(
   <StrictMode>
     <RecoilRoot>
       <MantineProvider withGlobalStyles withNormalizeCSS theme={{ colorScheme: 'dark' }}>
-        <App />
+        <NotificationsProvider>
+          <App />
+        </NotificationsProvider>
       </MantineProvider>
     </RecoilRoot>
   </StrictMode>,

@@ -1,4 +1,5 @@
 import { ActionIcon, Group, Footer as MantineFooter, TextInput } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import { IconCircleArrowRight, IconMessageDots } from '@tabler/icons-react';
 import axios, { AxiosError } from 'axios';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
@@ -34,6 +35,11 @@ export function Footer() {
       bottom = (await waitForElement(`#timestamp-${botTimestamp}`)) as HTMLDivElement;
       bottom!.scrollIntoView();
     } catch (err) {
+      showNotification({
+        title: 'server error',
+        message: 'there was a server error, try again in a few moments',
+        color: 'red',
+      });
       if (err instanceof AxiosError) {
         console.log(err.request, err.toJSON());
       } else {
