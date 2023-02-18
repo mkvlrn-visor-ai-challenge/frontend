@@ -11,6 +11,12 @@ export function App() {
   const { setChatId, setMessages } = useChatState();
   const [warningModal, setWarningModal] = useState(true);
 
+  const email = (
+    <Text span weight='bold'>
+      mkvlrn@gmail.com
+    </Text>
+  );
+
   useEffect(() => {
     setChatId(uuidV4());
     setMessages([]);
@@ -21,11 +27,7 @@ export function App() {
       <Modal opened={warningModal} onClose={() => setWarningModal(false)} title='backend offline'>
         <Text>
           hey guys! i took the backend offline for a while because of openai costs, but let me know
-          if you want it back online for any reason! toss me a line at{' '}
-          <Text span weight='bold'>
-            mkvlrn@gmail.com
-          </Text>
-          . later!
+          if you want it back online for any reason! drop me a line at {email}. later!
         </Text>
       </Modal>
       <Body />
