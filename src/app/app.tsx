@@ -1,5 +1,5 @@
-import { AppShell } from '@mantine/core';
-import { useEffect } from 'react';
+import { AppShell, Modal, Text } from '@mantine/core';
+import { useEffect, useState } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 
 import { Body } from '#/components/body.jsx';
@@ -9,6 +9,7 @@ import { useChatState } from '#/recoil/state.js';
 
 export function App() {
   const { setChatId, setMessages } = useChatState();
+  const [warningModal, setWarningModal] = useState(true);
 
   useEffect(() => {
     setChatId(uuidV4());
@@ -17,6 +18,16 @@ export function App() {
 
   return (
     <AppShell header={<Header />} footer={<Footer />} padding='md'>
+      <Modal opened={warningModal} onClose={() => setWarningModal(false)} title='backend offline'>
+        <Text>
+          hey guys! i took the backend offline for a while because of openai costs, but let me know
+          if you want it back online for any reason! toss me a line at{' '}
+          <Text span weight='bold'>
+            mkvlrn@gmail.com
+          </Text>
+          . later!
+        </Text>
+      </Modal>
       <Body />
     </AppShell>
   );
